@@ -1,0 +1,25 @@
+Informações do componente:
+
+Uses
+  Loading;
+
+Metodos:
+Start; {inicia a animação}
+Stop; {para a animação de loading}
+Property:
+Interpolation; {permite alterar a animação de loading. Vem por default em Linear}
+
+Recomendações:
+Utilizar os metodos em threading para não parar o processo principal enquanto estiver em modo Start. Ex de threading para utilizar os metodos start e stop enquando faz algum processo em paralelo:
+
+Loadgin.Start;
+TThread.CreateAnonymousThread(procedure
+begin
+  Sleep(5000); #processo em paralelo. Ex: Consulta na API
+     
+  TThread.Synchronize(nil,
+  procedure
+  begin
+    Loading.Stop;
+  end);
+end).Start;
