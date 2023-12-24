@@ -10,4 +10,14 @@ Recomendações:
 Utilizar o Uses Loading;
 Utilizar os metodos em threading para não parar o processo principal enquanto estiver em modo Start. Ex de threading para utilizar os metodos start e stop enquando faz algum processo:
 
-TThread.CreateAnonimousThread(
+Loadgin.Start;
+TThread.CreateAnonymousThread(procedure
+begin
+  Sleep(5000); #Consulta na API ou qualquer processo que precise rodar enquanto o Loading esta ativo     
+     
+  TThread.Synchronize(nil,
+  procedure
+  begin
+    Loading.Stop;
+  end);
+end).Start;
